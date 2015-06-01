@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--do not uncomment line bellow - cyclic creation will be performed-->
+    <!--<context:component-scan base-package="com.ringcentral.n11s.cpx"/>-->
+    <!--<context:property-placeholder location="${configuration.path}"/>-->
+
+
+    <bean id="ignite.cfg" class="org.apache.ignite.configuration.IgniteConfiguration">
+
+        <property name="discoverySpi">
+            <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
+                <property name="ipFinder">
+                    <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder">
+                        <property name="addresses" value="127.0.0.1:5000..5100"/>
+                    </bean>
+                </property>
+                <property name="localPort" value="5000"/>
+                <property name="localPortRange" value="30"/>
+                <!--<property name="joinTimeout" value="100"/>-->
+            </bean>
+        </property>
+
+        <property name="communicationSpi">
+            <bean class="org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi">
+                <property name="localPort" value="6000"/>
+                <property name="localPortRange" value="30"/>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

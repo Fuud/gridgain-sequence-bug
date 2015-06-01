@@ -1,0 +1,10 @@
+# idea projects #
+#################
+*.ipr
+*.iml
+*.iws
+*.idea
+
+# maven output #
+################
+target
